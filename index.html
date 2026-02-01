@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MerchantGifts — Modern Gift Store</title>
+  <meta name="description" content="MerchantGifts — a modern storefront for curated gifts." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Clean modern font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+
+<body>
+  <!-- Top progress bar (subtle loading / polish) -->
+  <div class="topbar-progress" id="topbarProgress" aria-hidden="true"></div>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#top" aria-label="MerchantGifts Home">
+        <span class="brand-mark" aria-hidden="true">MG</span>
+        <span class="brand-name">MerchantGifts</span>
+      </a>
+
+      <nav class="nav">
+        <a href="#shop">Shop</a>
+        <a href="#about">About</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+
+      <div class="header-actions">
+        <button class="icon-btn" id="themeToggle" aria-label="Toggle theme" title="Toggle theme">
+          <span class="icon" aria☐>◐</span>
+        </button>
+
+        <button class="cart-btn" id="openCart" aria-label="Open cart">
+          <span class="cart-dot" id="cartDot" aria-hidden="true"></span>
+          <span class="cart-label">Cart</span>
+          <span class="cart-count" id="cartCount">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- Hero -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <div class="pill">
+            <span class="pulse" aria-hidden="true"></span>
+            New drops weekly • Fast checkout
+          </div>
+          <h1>Gifts that look expensive — without trying too hard.</h1>
+          <p>
+            MerchantGifts is your modern storefront for curated, high-quality items.
+            Add products in one file and your store updates instantly.
+          </p>
+
+          <div class="hero-cta">
+            <a class="btn primary" href="#shop">Shop now</a>
+            <button class="btn ghost" id="viewFeatured">View featured</button>
+          </div>
+
+          <div class="hero-stats">
+            <div class="stat">
+              <div class="stat-top">Premium</div>
+              <div class="stat-bottom">UI / feel</div>
+            </div>
+            <div class="stat">
+              <div class="stat-top">Simple</div>
+              <div class="stat-bottom">Add products</div>
+            </div>
+            <div class="stat">
+              <div class="stat-top">Fast</div>
+              <div class="stat-bottom">GitHub Pages</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <div class="hero-card-inner">
+            <div class="hero-card-top">
+              <div class="badge">Featured</div>
+              <div class="sparkle" aria-hidden="true">✦</div>
+            </div>
+            <div class="hero-card-media">
+              <!-- Optional: place /assets/hero.jpg -->
+              <img src="./assets/hero.jpg" alt="Featured gift collage" onerror="this.closest('.hero-card-media').classList.add('no-img'); this.remove();" />
+              <div class="no-img-fallback">
+                <div class="blob"></div>
+                <div class="blob b2"></div>
+                <div class="blob b3"></div>
+                <div class="fallback-text">Drop a hero image in <code>assets/hero.jpg</code></div>
+              </div>
+            </div>
+            <div class="hero-card-bottom">
+              <div>
+                <div class="muted">Today’s vibe</div>
+                <div class="strong">Minimal • Clean • Giftable</div>
+              </div>
+              <button class="btn tiny" id="scrollToShop">Browse</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Shop -->
+    <section class="shop" id="shop">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Shop</h2>
+            <p class="muted">Search, filter, and sort. Tap a product for details.</p>
+          </div>
+
+          <div class="controls">
+            <div class="search-wrap">
+              <input id="searchInput" type="search" placeholder="Search products..." autocomplete="off" />
+              <span class="search-icon" aria-hidden="true">⌕</span>
+            </div>
+
+            <select id="categorySelect" aria-label="Filter by category">
+              <option value="all">All categories</option>
+            </select>
+
+            <select id="sortSelect" aria-label="Sort products">
+              <option value="featured">Sort: Featured</option>
+              <option value="priceAsc">Price: Low → High</option>
+              <option value="priceDesc">Price: High → Low</option>
+              <option value="nameAsc">Name: A → Z</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid" id="productGrid" aria-live="polite"></div>
+
+        <div class="empty" id="emptyState" hidden>
+          <div class="empty-card">
+            <div class="empty-icon">☁</div>
+            <div class="empty-title">No matches</div>
+            <div class="empty-sub">Try clearing filters or searching something else.</div>
+            <button class="btn ghost" id="clearFilters">Clear filters</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section class="about" id="about">
+      <div class="container about-grid">
+        <div class="glass">
+          <h3>Built for selling</h3>
+          <p class="muted">
+            This site is designed for GitHub Pages: fast, modern, and easy to update.
+            You can add products by editing a single list in <code>app.js</code>.
+          </p>
+          <ul class="checklist">
+            <li><span class="check">✓</span> Product cards + modal</li>
+            <li><span class="check">✓</span> Cart drawer + totals</li>
+            <li><span class="check">✓</span> Search + filters</li>
+            <li><span class="check">✓</span> Mobile responsive</li>
+          </ul>
+        </div>
+
+        <div class="glass">
+          <h3>How you’ll take orders</h3>
+          <p class="muted">
+            Since GitHub Pages is static, this demo includes a “Checkout” button that
+            can either (1) open a custom checkout link, or (2) generate a simple order summary
+            you can copy into DMs. You can also replace it later with Shopify/Stripe links.
+          </p>
+          <div class="inline-actions">
+            <button class="btn primary" id="demoCheckout">Demo checkout</button>
+            <button class="btn ghost" id="copyStoreLink">Copy store link</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq" id="faq">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>FAQ</h2>
+            <p class="muted">Quick answers for running this on GitHub Pages.</p>
+          </div>
+        </div>
+
+        <div class="accordion">
+          <details>
+            <summary>How do I add products?</summary>
+            <div class="details-body">
+              Edit the <code>PRODUCTS</code> array in <code>app.js</code>. Add name, price, images, category, and status.
+            </div>
+          </details>
+          <details>
+            <summary>Can I accept payments?</summary>
+            <div class="details-body">
+              Yes—swap the demo checkout with a Stripe Payment Link, Shopify, Etsy, or a “DM to order” flow.
+            </div>
+          </details>
+          <details>
+            <summary>Will the cart save?</summary>
+            <div class="details-body">
+              Yes. The cart uses <code>localStorage</code>, so it persists between refreshes on the same device.
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-left">
+        <div class="brand small">
+          <span class="brand-mark" aria-hidden="true">MG</span>
+          <span class="brand-name">MerchantGifts</span>
+        </div>
+        <div class="muted">© <span id="year"></span> MerchantGifts. All rights reserved.</div>
+      </div>
+      <div class="footer-right">
+        <a href="#top">Back to top ↑</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Product Modal -->
+  <div class="modal" id="productModal" aria-hidden="true" role="dialog" aria-label="Product details">
+    <div class="modal-backdrop" data-close-modal></div>
+    <div class="modal-card" role="document">
+      <button class="icon-btn modal-close" data-close-modal aria-label="Close product">✕</button>
+      <div class="modal-body" id="modalBody"></div>
+    </div>
+  </div>
+
+  <!-- Cart Drawer -->
+  <aside class="drawer" id="cartDrawer" aria-hidden="true">
+    <div class="drawer-backdrop" data-close-cart></div>
+    <div class="drawer-panel" role="dialog" aria-label="Cart">
+      <div class="drawer-head">
+        <div>
+          <div class="drawer-title">Your cart</div>
+          <div class="muted" id="cartSub">0 items</div>
+        </div>
+        <button class="icon-btn" data-close-cart aria-label="Close cart">✕</button>
+      </div>
+
+      <div class="drawer-body" id="cartItems"></div>
+
+      <div class="drawer-foot">
+        <div class="totals">
+          <div class="row">
+            <span class="muted">Subtotal</span>
+            <span class="strong" id="cartSubtotal">$0</span>
+          </div>
+          <div class="row">
+            <span class="muted">Estimated tax</span>
+            <span class="strong" id="cartTax">$0</span>
+          </div>
+          <div class="row total">
+            <span class="strong">Total</span>
+            <span class="strong" id="cartTotal">$0</span>
+          </div>
+        </div>
+
+        <button class="btn primary full" id="checkoutBtn">Checkout</button>
+        <button class="btn ghost full" id="clearCartBtn">Clear cart</button>
+
+        <div class="tiny muted center">
+          Tip: connect a Stripe Payment Link later for real payments.
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <script src="./app.js"></script>
+</body>
+</html>
